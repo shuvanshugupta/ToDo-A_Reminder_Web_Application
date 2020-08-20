@@ -63,10 +63,10 @@ def sendSMS(apikey, numbers, message):
 
 
 def send_email(send_to,ta):
-    email_user = 'shuvanshugupta101@gmail.com'
+    email_user = 'your_email'
     server = smtplib.SMTP ('smtp.gmail.com', 587)
     server.starttls()
-    server.login(email_user, 'wuapigkkusfnzqym')
+    server.login(email_user, 'email_password')
 
     #EMAIL
     message = 'Have you forgot this task\nTask: '+ str(ta.content)+'\nToDo- A Reminder Web Application'
@@ -78,7 +78,7 @@ def send_email_at(send_time,send_to,ta,u):
     send_email(send_to,ta)
     print('email sent')
     #send_message(u)
-    resp =  sendSMS('c49igJPDn1Q-URH8PBcuvPcpP6Pk2Cj5ixxkpSvPf8', '917355252778','Have you forgot this task\nTask: '+ str(ta.content)+'\nToDo- A Reminder Web Application')
+    resp =  sendSMS('api_key', '91##########','Have you forgot this task\nTask: '+ str(ta.content)+'\nToDo- A Reminder Web Application')
     print (resp)
     print('message sent')
     ta.delete()
