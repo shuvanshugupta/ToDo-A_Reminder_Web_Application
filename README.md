@@ -4,14 +4,17 @@ task and user, it gnerates a complex key using both keys and then retrieve those
 
 ### Home Page
 ![GitHub Logo](/images/1.png)
+
 This is what is shown when user is not authenticated. It changes it's content with authentication.
 
 ### Register Page
 ![GitHub Logo](/images/2.png)
+
 This is the layout of page used to register a new user.
 
 ### Login Page
 ![GitHub Logo](/images/3.png)
+
 Layout of Page used to login an existing user.
 
 ### Steps to Get an autmated reminder
