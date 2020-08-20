@@ -1,0 +1,337 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'todo.png' %}">
+    <title>ToDo</title>
+    <style>
+        /* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body {font-family: Consolas, 'Courier New', monospace;
+          background-color: white;
+          min-height: 700px; 
+          background-position: center; 
+          background-repeat: no-repeat; 
+          background-size: cover; 
+        }
+        .animat{
+            margin-top:100px;
+            text-align:center;
+        }
+        .container{
+            width:35%;
+            margin: 50px 435px 100px 435px;
+            border-radius:5px;
+            padding:5px;
+            margin-top: 55px;
+          background-color:white;
+          box-shadow:0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+        header
+        {
+            background-color: white;
+            box-shadow:0 0px 10px 0 rgba(0,0,0,0.2);
+            overflow: hidden;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        header img{
+            padding-top: 5px;
+            padding-left: 5px;
+            height: 50px;
+            width: 50px;
+        }
+        header h4{
+            padding-top: 20px;
+            font-size: 20px;
+            padding-left: 15px;
+        }
+        header h3{
+            padding-top: 20px;
+            font-size: 20px;
+            padding-right: 30px;
+        }
+        form{
+            padding:0px;
+            margin:10px;
+            margin-bottom: 5px;
+        }
+        input[type=date],input[type=time]{
+            padding:2px;
+            margin-top:6px;
+            margin-bottom: 0px;
+        }
+        textarea{
+            padding: 2px;
+            border-color: grey;
+        }
+        .container a{
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+        }
+        textarea:focus{
+            outline: none;
+        }
+        input[type=date]:focus,input[type=date]:focus{
+            outline: none;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+          }
+          
+          header li {
+            float: left;
+          }
+          
+          header li a {
+            text-decoration: none;
+            color:black;
+            
+          }
+          header li a:hover {
+            text-decoration: underline;
+            color:black;
+          }
+          footer{
+                height: 50px;
+                width: 100%;
+                background-color: #262626;
+                box-shadow:0 10px 0 0 rgba(0,0,0,0.2);
+                bottom: 0;
+                left: 0;
+                position: fixed;
+          }
+          footer h3{
+             font-size: 20px;
+             padding-top: 15px;
+             padding-bottom: 15px;
+             text-align: center;
+             color:white;
+          }
+          .animat-header{
+              background-color: black;
+              color:white;
+              font-size:14px;
+              padding-top:14px;
+              padding-bottom: 14px;
+          }
+          .content{
+            margin-left: 10px;
+            width: 400px;
+            min-height:30px;
+            word-wrap: break-word;
+            font-size: 13px;
+            display: inline-block;
+            margin-top: 10px;
+          }
+          button[type="submit"]{
+            padding:9px;
+            border: none;
+            margin-left: 70px;
+            margin-top: 5px;
+            margin-bottom: 6px;
+            border-radius: 4px;
+        }
+        button[type="submit"]:hover{
+          color:white;
+          background-color: #262626;
+      }
+          .date{
+            margin-top: 5px;
+            font-size: 13px;
+            display: inline-block;
+            margin-left: 10px;
+            height: fit-content;
+            width:fit-content;
+            padding: 2px;
+            margin-bottom: 12px;
+          }
+          .time{
+            font-size: 13px;
+            margin-top: 5px;
+            display: inline-block;
+            margin-left: 2px;
+            height: fit-content;
+            width:fit-content;
+            padding: 2px;
+            margin-bottom: 12px;
+          }
+          .taskimage{
+
+            display:block;
+            height: 25px;
+            width: 25px;
+            float: right;
+            border-radius: 2px;
+            border-color:grey;
+            margin:16px;
+          }
+          .error{
+            color: red;
+            margin-left: 450px;
+            margin-top:-80px;
+            font-size: 20px;
+          }
+    </style>
+</head>
+<body>
+    {% csrf_token %}
+    <header>
+        
+        <ul>
+        <li><h4 style="padding-right: 15px;">A</h4></li>
+        <li>
+            <div class="animat-header">
+                <h1>{<span
+                       class="txt-rotate"
+                       data-period="10000"
+                       data-rotate='[ "ToDo"]'></span>}</h1>
+            </div>
+        </li>
+        <li><h4>Reminder Web App</h4></li>
+        {% if user.is_authenticated %}
+        <li style="float: right;"><a href="accounts/logout"><h3>Logout</h3></a></li>
+        <li style="float: right;"><a href="#0"><h3>Hello, {{user.first_name}}</h3></a></li>
+        {% else %}
+        <li style="float: right;"><a href="accounts/register"><h3>Register</h3></a></li>
+        <li style="float: right;"><a href="accounts/login"><h3>Login</h3></a></li>
+        </ul>
+        {% endif %}
+        
+    </header>
+    <div class="animat">
+        <h1>Get your reminder
+            <span
+               class="txt-rotate"
+               data-period="1000"
+               data-rotate='[ "at fixed time.", "at fixed date.", "by E-mails.", "by messages."]'></span>
+          </h1>
+    </div>
+    <article>
+        <!-- container -->
+        <div class="container">
+        <form action="add" method="POST">
+            {% csrf_token %}
+            <textarea placeholder="Add tour task here:" name="content" autofocus wrap="hard" required rows="4" cols="61"></textarea>
+            <input type="date" name="date" required>
+            <input type="time" name="time" required>
+            <button type="submit">S U B M I T</button>
+        </form>
+        <!-- post starts here-->
+        {% if user.is_authenticated %}
+        <ul style="padding-top: 10px; padding-bottom:10px;">
+            {% for t in tasks %}
+            <hr>
+            <li>
+            <p class="content">{{t.content}}</p>
+            <a href="{% url 'delete' pk=t.pk %}"><img class="taskimage" src="{% static 'cross.png' %}"></a>
+            <p class="date">{{t.date}}</p>
+            <p class="time">{{t.time}}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <hr>
+        <h4 style="text-align: center;  margin-top:10px; margin-bottom:7px;">You will see your tasks here once you login.</h4>
+        {% endif %}
+        <!-- post ends here -->
+        </div>
+        <div class="error">
+          {% for message in messages %}
+          <p>{{message}}</p>
+          {% endfor %}
+        </div>
+       <!-- container ends here --> 
+    </article>
+    <footer>
+        <h3>This web application is maintained and developed by Shuvanshu Gupta</h3>
+    </footer>
+    <script>
+        var TxtRotate = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 1000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+          };
+          
+          TxtRotate.prototype.tick = function() {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+          
+            if (this.isDeleting) {
+              this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+              this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+          
+            this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+          
+            var that = this;
+            var delta = 300 - Math.random() * 100;
+          
+            if (this.isDeleting) { delta /= 2; }
+          
+            if (!this.isDeleting && this.txt === fullTxt) {
+              delta = this.period;
+              this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+              this.isDeleting = false;
+              this.loopNum++;
+              delta = 500;
+            }
+          
+            setTimeout(function() {
+              that.tick();
+            }, delta);
+          };
+          
+          window.onload = function() {
+            var elements = document.getElementsByClassName('txt-rotate');
+            for (var i=0; i<elements.length; i++) {
+              var toRotate = elements[i].getAttribute('data-rotate');
+              var period = elements[i].getAttribute('data-period');
+              if (toRotate) {
+                new TxtRotate(elements[i], JSON.parse(toRotate), period);
+              }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+            document.body.appendChild(css);
+          };
+    </script>
+</body>
+</html>
