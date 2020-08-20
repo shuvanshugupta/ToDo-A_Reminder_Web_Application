@@ -26,3 +26,5 @@ Layout of Page used to login an existing user.
 
 #### 5.SMS Screenshot
 ![GitHub Logo](/images/8.png)
+
+And Finally Don't worry about ToDo list clutters after getting notification, This Web Application automatically deletes thos for you.
