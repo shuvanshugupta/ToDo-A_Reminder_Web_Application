@@ -76,7 +76,7 @@ def send_email_at(send_time,send_to,ta,u):
     time.sleep(send_time.timestamp() - time.time())
     send_email(send_to,ta)
     print('email sent')
-    resp =  sendSMS('c49igJPDn1Q-URH8PBcuvPcpP6Pk2Cj5ixxkpSvPf8', '91'+str(u.last_name),'Have you forgot this task\nTask: '+ str(ta.content)+'\nToDo- A Reminder Web Application')
+    resp =  sendSMS('############', '91'+str(u.last_name),'Have you forgot this task\nTask: '+ str(ta.content)+'\nToDo- A Reminder Web Application')
     print (resp)
     print('message sent')
     ta.delete()
@@ -87,9 +87,9 @@ def emails():
         u = get_object_or_404(User,pk=int(it)//1000)
         ta = get_object_or_404(task,pk=int(it)%1000)
         send_to = u.email
-        print(u.email)
-        print(u.first_name)
-        print(u.last_name)
+        #print(u.email)
+        #print(u.first_name)
+        #print(u.last_name)
         timelist.pop(it)
         send_email_at(send_time,send_to,ta,u)
 
